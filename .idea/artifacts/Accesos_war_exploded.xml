@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Accesos:war exploded">
+    <output-path>C:/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/Acceso</output-path>
+    <root id="archive" name="Accesos_war exploded.war">
+      <element id="javaee-facet-resources" facet="Accesos/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Accesos" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Json" />
+          <element id="library" level="project" name="Hibernate" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.35-bin" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>
