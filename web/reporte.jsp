@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
-  <title>Sistema de Monitoreo de Armario de Pilotaje Automático</title>
+  <title>Monitoreo de Torniquetes</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="js/primeui/themes/bootstrap/theme.css" />
@@ -21,8 +21,6 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
 
-
-
 </head>
 <body>
 
@@ -32,7 +30,7 @@
       <img src="img/metrol.png" id="ml"/>
     </div>
   </div>
-  <h3>Sistema</h3>
+  <h2>Monitoreo de Torniquetes</h2>
 </header>
 
 <aside>
@@ -40,7 +38,7 @@
     <ul class="sidebar-menu" >
       <li class="sub-menu">
         <a href="index.jsp" >
-          <span>Monitorear</span>
+          <span>Monitoreo de Torniquetes</span>
         </a>
       </li>
       <li class="sub-menu">
@@ -61,9 +59,8 @@
     <label for="dateFrom">De: </label><input type="text" id="dateFrom">
     <label for="dateTo">A: </label><input type="text" id="dateTo">
     <button id="buscar" type="button">Buscar</button>
-    <hr>
-
-    <div id="t1"></div>
+    <button id="toExcel" type="button" disabled>Exportar a Excel</button>
+    <hr id="nextReport">
 
   </section>
 </section>

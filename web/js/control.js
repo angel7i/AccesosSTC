@@ -4,6 +4,12 @@ var error = false;
 
 $(document).ready(function()
 {
+    $("#bt1").puibutton(
+        {
+            icon: 'fa-play'
+        }
+    );
+
     $("#bt1").on("click", function()
     {
         if ($(this).html() == "Detener")
@@ -11,7 +17,7 @@ $(document).ready(function()
             noClose = false;
             clearInterval(loop);
             $(this).html("Guardar");
-            $(this).removeClass("btn btn-danger").addClass("btn btn-success");
+            $("#bt1").puibutton('icon', 'fa fa-play');
         }
         else
         {
@@ -22,7 +28,7 @@ $(document).ready(function()
 
             noClose = true;
             $(this).html("Detener");
-            $(this).removeClass("btn btn-success").addClass("btn btn-danger");
+            $("#bt1").puibutton('icon', 'fa fa-stop');
         }
     });
 
@@ -50,7 +56,7 @@ function save()
                 {field:'tarjeta', headerText: 'Tarjeta'},
                 {field:'total', headerText: 'Total'},
                 //{field:'noaut', headerText: 'No Autorizado'},
-                {field:'estado', headerText: 'Estado'}
+                {field:'estado', headerText: 'Estado', content: getState}
                 //{field:'fecha', headerText: 'Fecha', sortable:true}
             ],
         datasource: function(callback)
@@ -80,5 +86,27 @@ function save()
         },
         selectionMode: 'single'
     });
+}
+
+function getState(data)
+{
+    if (data.estado == "Funcionando")
+    {
+        return $("<div title='Estado'>" +
+            "<img src='img/ok.png' width='50px' />" +
+            "</div>");
+    }
+    else if (data.estado == "No funciona boleto")
+    {
+        return $("<div title='Estado'>" +
+            "<img src='img/notpass.png' width='50px' />" +
+            "</div>");
+    }
+    else
+    {
+        return $("<div title='Estado'>" +
+            "<img src='img/error.png' width='50px'/>" +
+            "</div>");
+    }
 }
 

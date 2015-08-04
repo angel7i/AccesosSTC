@@ -1,6 +1,5 @@
 package control;
 
-import org.hibernate.Hibernate;
 import tables.Bateria;
 import tables.Torniquete;
 
@@ -17,7 +16,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "Reporte", urlPatterns = "/reporte")
 public class Reporte extends HttpServlet
@@ -92,7 +90,7 @@ public class Reporte extends HttpServlet
 
     private String fecha(Date d)
     {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy' 'hh:mm:ss a");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy" + "\n" +  "hh:mm:ss a");
         return format.format(d);
     }
 

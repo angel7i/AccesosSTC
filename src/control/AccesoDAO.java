@@ -12,11 +12,9 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 import tables.Bateria;
 import tables.Estacion;
-import tables.Linea;
 import tables.Torniquete;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -97,21 +95,25 @@ public class AccesoDAO
             t1.setTorniquete(trama.get("T1N").toString());
             t1.setEntradaBoleto(Integer.parseInt(trama.get("T1").toString()));
             t1.setEntradaTarjeta(Integer.parseInt(trama.get("B1").toString()));
+            t1.setNoAutorizado(0);
             t1.setEstado(Integer.parseInt(trama.get("ES1").toString()));
             t1.setBateria(b);
             t2.setTorniquete(trama.get("T2N").toString());
             t2.setEntradaBoleto(Integer.parseInt(trama.get("T2").toString()));
             t2.setEntradaTarjeta(Integer.parseInt(trama.get("B2").toString()));
+            t2.setNoAutorizado(0);
             t2.setEstado(Integer.parseInt(trama.get("ES2").toString()));
             t2.setBateria(b);
             t3.setTorniquete(trama.get("T3N").toString());
             t3.setEntradaBoleto(Integer.parseInt(trama.get("T3").toString()));
             t3.setEntradaTarjeta(Integer.parseInt(trama.get("B3").toString()));
+            t3.setNoAutorizado(0);
             t3.setEstado(Integer.parseInt(trama.get("ES3").toString()));
             t3.setBateria(b);
             t4.setTorniquete(trama.get("T4N").toString());
             t4.setEntradaBoleto(Integer.parseInt(trama.get("B4").toString()));
             t4.setEntradaTarjeta(Integer.parseInt(trama.get("T4").toString()));
+            t4.setNoAutorizado(0);
             t4.setEstado(Integer.parseInt(trama.get("ES4").toString()));
             t4.setBateria(b);
 
@@ -176,20 +178,6 @@ public class AccesoDAO
             System.out.println(e.getClass().toString());
             e.printStackTrace();
         }
-//        finally
-//        {
-//            if (session != null && (session.isConnected() || session.isOpen()))
-//            {
-//                if (tr != null && tr.isActive())
-//                {
-//                    tr.rollback();
-//                }
-//
-//                session.close();
-//            }
-//
-//            ManagedSessionContext.unbind(sessionFactory);
-//        }
 
         return list;
     }

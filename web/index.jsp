@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
-  <title>Sistema </title>
+  <title>Monitoreo de Torniquetes</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="js/primeui/themes/bootstrap/theme.css" />
@@ -29,7 +29,7 @@
       <img src="img/metrol.png" id="ml"/>
     </div>
   </div>
-  <h3>Sistema</h3>
+  <h1>Monitoreo de Torniquetes</h1>
 </header>
 
 <aside>
@@ -37,7 +37,7 @@
     <ul class="sidebar-menu" >
       <li class="sub-menu">
         <a href="index.jsp" >
-          <span>Monitorear</span>
+          <span>Monitoreo de Torniquetes</span>
         </a>
       </li>
       <li class="sub-menu">
@@ -53,7 +53,7 @@
   <section class="wrapper">
     <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Entrada Nororiente</h3>
     <hr>
-    <button id="bt1" type="button" class="btn btn-success">Guardar</button>
+    <button id="bt1" type="button">Guardar</button>
     <hr>
     <div id="testado"></div>
   </section>

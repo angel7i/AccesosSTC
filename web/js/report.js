@@ -33,7 +33,16 @@ $(document).ready(function()
             }
         }
     );
-    $('#buscar').puibutton();
+    $('#buscar').puibutton(
+        {
+            icon: 'fa-search'
+        }
+    );
+    $('#toExcel').puibutton(
+        {
+            icon: 'fa-file-excel-o'
+        }
+    );
 
     $('#buscar').on("click", function()
     {
@@ -46,13 +55,12 @@ $(document).ready(function()
         }
         else
         {
+            $('#t1').remove();
+            var t = "<div id='t1'></div>";
+            $("#nextReport").after(t);
             $('#t1').puidatatable(
                 {
                     responsive : true,
-                    paginator:
-                    {
-                        rows: 20
-                    },
                     columns:
                         [
                             //{field:'linea', headerText: 'Linea'},
@@ -63,8 +71,8 @@ $(document).ready(function()
                             {field:'tarjeta', headerText: 'Tarjeta', sortable:true},
                             {field:'total', headerText: 'Total', sortable:true},
                             //{field:'noaut', headerText: 'No Autorizado'},
-                            {field:'estado', headerText: 'Estado'},
-                            {field:'fecha', headerText: 'Fecha', sortable:true}
+                            {field:'estado', headerText: 'Estado', content: getState},
+                            {field:'fecha', headerText: 'Fecha', sortable:true, content: format}
                         ],
                     datasource: function(callback)
                     {
@@ -92,11 +100,15 @@ $(document).ready(function()
                             }
                         });
                     },
+                    paginator:
+                    {
+                        rows: 20
+                    },
                     selectionMode: 'single',
                     rowSelect: function(event, data)
                     {
                         $('#messages').remove();
-                        var message = "<div id='messages' title='Detalle'>" +
+                        var message = "<div id='messages' title='Detalle' style='position: fixed; display: inline-block'>" +
                             "Torniquete: " + data.torniq + "<br>" +
                             "Boletos :" + data.boleto + "<br>" +
                             "Tarjeta: " + data.tarjeta + "<br>" +
@@ -104,21 +116,78 @@ $(document).ready(function()
                             "Estado: "  + data.estado +  "<br>" +
                             "Fecha: " + data.fecha +  "<br>" +
                             "</div>";
-                        $("#t1").before(message);
-                        $('#messages').puidialog( {
-                            location: "left top",
-                            closable: true,
-                            draggable: true,
-                            responsive: true
+                        $("#nextReport").after(message);
+                        $('#messages').puidialog(
+                        {
+                            closable: true
                         });
-                        $('#messages').puidialog("show");
                     },
                     rowUnselect: function(event, data)
                     {
                         $('#messages').remove();
                     }
                 });
+            $('#toExcel').puibutton('enable');
         }
+    });
+
+    $('#toExcel').on('click', function()
+    {
+
+
+        var from = $("#dateFrom").val();
+        var to = $("#dateTo").val();
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: 'toExcel',
+                data: "from=" + from + "&to=" + to,
+                dataType: 'json',
+                context: this,
+                success: function(data)
+                {
+                    if (data.response == "Error")
+                    {
+                        console.log(data.response);
+                    }
+                    else
+                    {
+                        console.log(data.response);
+                    }
+                },
+                error: function (textStatus, errorThrown)
+                {
+                    console.log("Error->" + errorThrown + ' : ' + textStatus);
+                }
+            });
     });
 });
 
+
+function getState(data)
+{
+    if (data.estado == "Funcionando")
+    {
+        return $("<div title='Estado'>" +
+                "<img src='img/ok.png' width='50px' />" +
+                "</div>");
+    }
+    else if (data.estado == "No funciona boleto")
+    {
+        return $("<div title='Estado'>" +
+                "<img src='img/notpass.png' width='50px' />" +
+                "</div>");
+    }
+    else
+    {
+        return $("<div title='Estado'>" +
+                "<img src='img/error.png' width='50px'/>" +
+                "</div>");
+    }
+}
+
+function format(data)
+{
+    return data.fecha.replace(/(\r\n|\n|\r)/gm, "<br>");
+}
