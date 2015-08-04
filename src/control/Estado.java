@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 @WebServlet(name = "Estado", urlPatterns = "/estado")
@@ -81,12 +79,6 @@ public class Estado extends HttpServlet
         array =  Json.createArrayBuilder().add(t1).add(t2).add(t3).add(t4).build();
 
         return array;
-    }
-
-    private String fecha(Date d)
-    {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy' 'hh:mm:ss a");
-        return format.format(d);
     }
 
     private String estado(int e)

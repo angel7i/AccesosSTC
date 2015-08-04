@@ -108,18 +108,18 @@ public class ConMicro
                     trama.substring(trama.indexOf("C4")+ 3, trama.indexOf("C4") + 4);
             info.put("ES4", estado(es4));
 
-            for (Map.Entry<String, Object> s : info.entrySet())
-            {
-                System.out.println(s.getKey() + ":" + s.getValue());
-            }
+//            for (Map.Entry<String, Object> s : info.entrySet())
+//            {
+//                System.out.println(s.getKey() + ":" + s.getValue());
+//            }
         }
         catch (SocketTimeoutException e)
         {
-            System.out.println("No hay respuesta");
+            System.out.println("Tiempo de respueta terminado");
         }
         catch (ConnectException e)
         {
-            System.out.println("No hay respuesta2");
+            System.out.println("No hay conexion con el micro");
         }
         catch (Exception e)
         {
@@ -163,7 +163,7 @@ public class ConMicro
 
     public static void main(String[] args)
     {
-        ConMicro r = new ConMicro();
-        r.getTrama();
+//        ConMicro r = new ConMicro();
+//        r.getTrama();
     }
 }

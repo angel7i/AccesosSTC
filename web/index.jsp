@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
 
-  <title>Sistema </title>
+  <title>Monitoreo de Torniquetes</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="js/primeui/themes/bootstrap/theme.css" />
@@ -37,7 +37,7 @@
     <ul class="sidebar-menu" >
       <li class="sub-menu">
         <a href="index.jsp" >
-          <span>Monitorear</span>
+          <span>Monitoreo de Torniquetes</span>
         </a>
       </li>
       <li class="sub-menu">
