@@ -30,7 +30,11 @@
       <img src="img/metrol.png" id="ml"/>
     </div>
   </div>
+<<<<<<< HEAD
   <h2>Monitoreo de Torniquetes</h2>
+=======
+  <h3>Monitoreo de Torniquetes</h3>
+>>>>>>> origin/master
 </header>
 
 <aside>

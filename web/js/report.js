@@ -33,6 +33,7 @@ $(document).ready(function()
             }
         }
     );
+<<<<<<< HEAD
     $('#buscar').puibutton(
         {
             icon: 'fa-search'
@@ -43,6 +44,10 @@ $(document).ready(function()
             icon: 'fa-file-excel-o'
         }
     );
+=======
+    $('#buscar').puibutton();
+    $('#toExcel').puibutton();
+>>>>>>> origin/master
 
     $('#buscar').on("click", function()
     {
@@ -133,6 +138,7 @@ $(document).ready(function()
 
     $('#toExcel').on('click', function()
     {
+<<<<<<< HEAD
 
 
         var from = $("#dateFrom").val();
@@ -161,6 +167,9 @@ $(document).ready(function()
                     console.log("Error->" + errorThrown + ' : ' + textStatus);
                 }
             });
+=======
+        alert("Pronto :)");
+>>>>>>> origin/master
     });
 });
 
