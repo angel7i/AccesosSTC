@@ -1,3 +1,4 @@
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -30,11 +31,7 @@
       <img src="img/metrol.png" id="ml"/>
     </div>
   </div>
-<<<<<<< HEAD
-  <h2>Monitoreo de Torniquetes</h2>
-=======
-  <h3>Monitoreo de Torniquetes</h3>
->>>>>>> origin/master
+  <h1>Monitoreo de Torniquetes</h1>
 </header>
 
 <aside>
@@ -63,7 +60,12 @@
     <label for="dateFrom">De: </label><input type="text" id="dateFrom">
     <label for="dateTo">A: </label><input type="text" id="dateTo">
     <button id="buscar" type="button">Buscar</button>
-    <button id="toExcel" type="button" disabled>Exportar a Excel</button>
+    <%String path= System.getProperty("user.home") +
+            File.separator + "Downloads" + File.separator +
+            "ReporteTorniquetes.xls";%>
+    <a href="<%=path%>" id="toExcel" download="ReporteTorniquetes.xls">Exportar a Excel</a>
+    <a href="<%=path%>"  download="ReporteTorniquetes.xls">Exportar a Excel</a>
+
     <hr id="nextReport">
 
   </section>

@@ -1,5 +1,5 @@
 package tables;
-// Generated Jul 17, 2015 2:10:40 PM by Hibernate Tools 4.3.1
+// Generated Sep 2, 2015 4:24:31 PM by Hibernate Tools 4.3.1
 
 
 import javax.persistence.Column;
@@ -17,103 +17,115 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="torniquete"
-        ,catalog="accesos"
+    ,catalog="accesos"
 )
 public class Torniquete  implements java.io.Serializable {
 
 
-    private Integer idTorniquete;
-    private Bateria bateria;
-    private String torniquete;
-    private Integer entradaBoleto;
-    private Integer entradaTarjeta;
-    private Integer noAutorizado;
-    private Integer estado;
+     private Integer idTorniquete;
+     private Bateria bateria;
+     private String torniquete;
+     private String fase;
+     private Integer entradaBoleto;
+     private Integer entradaTarjeta;
+     private Integer noAutorizado;
+     private Integer estado;
 
     public Torniquete() {
     }
 
-
+	
     public Torniquete(Bateria bateria) {
         this.bateria = bateria;
     }
-    public Torniquete(Bateria bateria, String torniquete, Integer entradaBoleto, Integer entradaTarjeta, Integer noAutorizado, Integer estado) {
-        this.bateria = bateria;
-        this.torniquete = torniquete;
-        this.entradaBoleto = entradaBoleto;
-        this.entradaTarjeta = entradaTarjeta;
-        this.noAutorizado = noAutorizado;
-        this.estado = estado;
+    public Torniquete(Bateria bateria, String torniquete, String fase, Integer entradaBoleto, Integer entradaTarjeta, Integer noAutorizado, Integer estado) {
+       this.bateria = bateria;
+       this.torniquete = torniquete;
+       this.fase = fase;
+       this.entradaBoleto = entradaBoleto;
+       this.entradaTarjeta = entradaTarjeta;
+       this.noAutorizado = noAutorizado;
+       this.estado = estado;
     }
+   
+     @Id @GeneratedValue(strategy=IDENTITY)
 
-    @Id @GeneratedValue(strategy=IDENTITY)
-
-
+    
     @Column(name="idTorniquete", unique=true, nullable=false)
     public Integer getIdTorniquete() {
         return this.idTorniquete;
     }
-
+    
     public void setIdTorniquete(Integer idTorniquete) {
         this.idTorniquete = idTorniquete;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="Bateria_idBateria", nullable=false)
     public Bateria getBateria() {
         return this.bateria;
     }
-
+    
     public void setBateria(Bateria bateria) {
         this.bateria = bateria;
     }
 
-
+    
     @Column(name="torniquete", length=10)
     public String getTorniquete() {
         return this.torniquete;
     }
-
+    
     public void setTorniquete(String torniquete) {
         this.torniquete = torniquete;
     }
 
+    
+    @Column(name="fase", length=10)
+    public String getFase() {
+        return this.fase;
+    }
+    
+    public void setFase(String fase) {
+        this.fase = fase;
+    }
 
+    
     @Column(name="entradaBoleto")
     public Integer getEntradaBoleto() {
         return this.entradaBoleto;
     }
-
+    
     public void setEntradaBoleto(Integer entradaBoleto) {
         this.entradaBoleto = entradaBoleto;
     }
 
-
+    
     @Column(name="entradaTarjeta")
     public Integer getEntradaTarjeta() {
         return this.entradaTarjeta;
     }
-
+    
     public void setEntradaTarjeta(Integer entradaTarjeta) {
         this.entradaTarjeta = entradaTarjeta;
     }
 
-
+    
     @Column(name="noAutorizado")
     public Integer getNoAutorizado() {
         return this.noAutorizado;
     }
-
+    
     public void setNoAutorizado(Integer noAutorizado) {
         this.noAutorizado = noAutorizado;
     }
 
-
+    
     @Column(name="estado")
     public Integer getEstado() {
         return this.estado;
     }
-
+    
     public void setEstado(Integer estado) {
         this.estado = estado;
     }

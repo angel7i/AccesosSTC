@@ -1,5 +1,5 @@
 package tables;
-// Generated Jul 17, 2015 1:56:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 2, 2015 4:24:31 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -33,7 +33,7 @@ public class Bateria  implements java.io.Serializable {
      private String acceso;
      private Integer entradas;
      private Date fecha;
-     private Set<Torniquete> torniquetes = new HashSet(0);
+     private Set<Torniquete> torniquetes = new HashSet<Torniquete>(0);
 
     public Bateria() {
     }
@@ -42,7 +42,7 @@ public class Bateria  implements java.io.Serializable {
     public Bateria(Estacion estacion) {
         this.estacion = estacion;
     }
-    public Bateria(Estacion estacion, String acceso, Integer entradas, Date fecha, Set torniquetes) {
+    public Bateria(Estacion estacion, String acceso, Integer entradas, Date fecha, Set<Torniquete> torniquetes) {
        this.estacion = estacion;
        this.acceso = acceso;
        this.entradas = entradas;

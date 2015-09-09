@@ -51,29 +51,37 @@ public class Estado extends HttpServlet
             add("torniq", trama.get("T1N").toString()).
             add("boleto", Integer.parseInt(trama.get("B1").toString())).
             add("tarjeta", Integer.parseInt(trama.get("T1").toString())).
+            add("noautorizado", Integer.parseInt(trama.get("P1").toString())).
             add("total", Integer.parseInt(trama.get("B1").toString())
-            + Integer.parseInt(trama.get("T1").toString())).
-            add("estado", estado(Integer.parseInt(trama.get("ES1").toString()))).build();
+                    + Integer.parseInt(trama.get("T1").toString())
+                    + Integer.parseInt(trama.get("P1").toString())).
+                    add("estado", estado(Integer.parseInt(trama.get("ES1").toString()))).build();
         JsonObject t2 = Json.createObjectBuilder().
                 add("torniq", trama.get("T2N").toString()).
                 add("boleto", Integer.parseInt(trama.get("B2").toString())).
                 add("tarjeta", Integer.parseInt(trama.get("T2").toString())).
+                add("noautorizado", Integer.parseInt(trama.get("P").toString())).
                 add("total", Integer.parseInt(trama.get("B2").toString())
-                        + Integer.parseInt(trama.get("T2").toString())).
+                        + Integer.parseInt(trama.get("T2").toString())
+                        + Integer.parseInt(trama.get("P2").toString())).
                 add("estado", estado(Integer.parseInt(trama.get("ES2").toString()))).build();
         JsonObject t3 = Json.createObjectBuilder().
                 add("torniq", trama.get("T3N").toString()).
                 add("boleto", Integer.parseInt(trama.get("B3").toString())).
                 add("tarjeta", Integer.parseInt(trama.get("T3").toString())).
+                add("noautorizado", Integer.parseInt(trama.get("P3").toString())).
                 add("total", Integer.parseInt(trama.get("B3").toString())
-                        + Integer.parseInt(trama.get("T3").toString())).
+                        + Integer.parseInt(trama.get("T3").toString())
+                        + Integer.parseInt(trama.get("P3").toString())).
                 add("estado", estado(Integer.parseInt(trama.get("ES3").toString()))).build();
         JsonObject t4 = Json.createObjectBuilder().
                 add("torniq", trama.get("T4N").toString()).
                 add("boleto", Integer.parseInt(trama.get("B4").toString())).
                 add("tarjeta", Integer.parseInt(trama.get("T4").toString())).
+                add("noautorizado", Integer.parseInt(trama.get("P4").toString())).
                 add("total", Integer.parseInt(trama.get("B4").toString())
-                        + Integer.parseInt(trama.get("T4").toString())).
+                        + Integer.parseInt(trama.get("T4").toString())
+                        + Integer.parseInt(trama.get("P4").toString())).
                 add("estado", estado(Integer.parseInt(trama.get("ES4").toString()))).build();
 
         array =  Json.createArrayBuilder().add(t1).add(t2).add(t3).add(t4).build();
@@ -88,9 +96,9 @@ public class Estado extends HttpServlet
             case 0:
                 return "Error";
             case 1:
-                return "No funciona boleto";
+                return "Boleto inhabilitado";
             case 2:
-                return "Funcionando";
+                return "Habilitado";
         }
 
         return null;

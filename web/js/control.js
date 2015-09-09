@@ -55,7 +55,7 @@ function save()
                 {field:'boleto', headerText: 'Boletos'},
                 {field:'tarjeta', headerText: 'Tarjeta'},
                 {field:'total', headerText: 'Total'},
-                //{field:'noaut', headerText: 'No Autorizado'},
+                {field:'noautorizado', headerText: 'No Autorizado'},
                 {field:'estado', headerText: 'Estado', content: getState}
                 //{field:'fecha', headerText: 'Fecha', sortable:true}
             ],
@@ -90,13 +90,13 @@ function save()
 
 function getState(data)
 {
-    if (data.estado == "Funcionando")
+    if (data.estado == "Habilitado")
     {
         return $("<div title='Estado'>" +
             "<img src='img/ok.png' width='50px' />" +
             "</div>");
     }
-    else if (data.estado == "No funciona boleto")
+    else if (data.estado == "Boleto inhabilitado")
     {
         return $("<div title='Estado'>" +
             "<img src='img/notpass.png' width='50px' />" +

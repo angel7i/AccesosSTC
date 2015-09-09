@@ -38,14 +38,15 @@ public class ToExcel extends HttpServlet
             Date to = toDate(req.getParameter("to"));
 
             List list = AccesoDAO.getEntradas(from, to);
+            String p = null;
 
             if (list != null)
             {
-                if (doExcel(list, ""))
+                if ((p = Excel.doExcel(list)) != null)
                 {
                     System.out.println("OKExcel");
                     JsonObject e = Json.createObjectBuilder().
-                            add("response", "OK").build();
+                            add("response", p).build();
                     resp.getWriter().print(e);
                 }
                 else
@@ -93,98 +94,79 @@ public class ToExcel extends HttpServlet
         return  d;
     }
 
-    private boolean doExcel(List query, String fileName)
-    {
-        boolean success = false;
+//    private String doExcel(List query, String fileName)
+//    {
+//        String success = null;
+//
+//        try
+//        {
+//            String pathFile = "ReporteTorniquetes.xls";
+//            File fileXLS = new File(pathFile);
+//
+//            if(fileXLS.exists())
+//                fileXLS.delete();
+//
+//            HSSFWorkbook excel = new HSSFWorkbook();
+//            FileOutputStream file = new FileOutputStream(fileXLS);
+//            HSSFSheet page = excel.createSheet("Torniquetes");
+//
+//            HSSFRow header = page.createRow(0);
+//            header.createCell(0).setCellValue("Torniquete");
+//            header.createCell(1).setCellValue("Boletos");
+//            header.createCell(2).setCellValue("Tarjeta");
+//            header.createCell(3).setCellValue("Total");
+//            header.createCell(4).setCellValue("Estado");
+//            header.createCell(5).setCellValue("Fecha");
+//
+//            HSSFCellStyle style = excel.createCellStyle();
+//            style.setBorderBottom(CellStyle.BORDER_MEDIUM);
+//            style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+//            style.setBorderLeft(CellStyle.BORDER_MEDIUM);
+//            style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
+//            style.setBorderRight(CellStyle.BORDER_MEDIUM);
+//            style.setRightBorderColor(IndexedColors.BLACK.getIndex());
+//            style.setBorderTop(CellStyle.BORDER_MEDIUM);
+//
+//            for (Object o : query)
+//            {
+//                Bateria b = (Bateria) o;
+//
+//                for (Torniquete t : b.getTorniquetes())
+//                {
+//                    HSSFRow row = page.createRow(page.getLastRowNum() + 1);
+//                    row.createCell(0).setCellValue(t.getTorniquete());
+//                    row.createCell(1).setCellValue(t.getEntradaBoleto());
+//                    row.createCell(2).setCellValue(t.getEntradaTarjeta());
+//                    row.createCell(3).setCellValue(t.getEntradaBoleto() + t.getEntradaTarjeta());
+//                    row.createCell(4).setCellValue(estado(t.getEstado()));
+//                    row.createCell(5).setCellValue(fecha(b.getFecha()));
+//                }
+//            }
+//
+//            for (Row r : page)
+//            {
+//                for (Cell c : r)
+//                {
+//                    c.setCellStyle(style);
+//                }
+//            }
+//
+//            page.autoSizeColumn(4);
+//            page.autoSizeColumn(5);
+//
+//            excel.write(file);
+//            file.close();
+//            AccesoDAO.close();
+//
+//            success = fileXLS.getAbsolutePath();
+//        }
+//        catch (IOException ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//
+//        return success;
+//    }
 
-        try
-        {
-            String pathFile = "ReporteTorniquetes.xls";
-            File fileXLS = new File(pathFile);
 
-            if(fileXLS.exists())
-                fileXLS.delete();
-
-            HSSFWorkbook excel = new HSSFWorkbook();
-            FileOutputStream file = new FileOutputStream(fileXLS);
-            HSSFSheet page = excel.createSheet("Torniquetes");
-
-            HSSFRow header = page.createRow(0);
-            header.createCell(0).setCellValue("Torniquete");
-            header.createCell(1).setCellValue("Boletos");
-            header.createCell(2).setCellValue("Tarjeta");
-            header.createCell(3).setCellValue("Total");
-            header.createCell(4).setCellValue("Estado");
-            header.createCell(5).setCellValue("Fecha");
-
-            HSSFCellStyle style = excel.createCellStyle();
-            style.setBorderBottom(CellStyle.BORDER_MEDIUM);
-            style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
-            style.setBorderLeft(CellStyle.BORDER_MEDIUM);
-            style.setLeftBorderColor(IndexedColors.BLACK.getIndex());
-            style.setBorderRight(CellStyle.BORDER_MEDIUM);
-            style.setRightBorderColor(IndexedColors.BLACK.getIndex());
-            style.setBorderTop(CellStyle.BORDER_MEDIUM);
-
-            for (Object o : query)
-            {
-                Bateria b = (Bateria) o;
-
-                for (Torniquete t : b.getTorniquetes())
-                {
-                    HSSFRow row = page.createRow(page.getLastRowNum() + 1);
-                    row.createCell(0).setCellValue(t.getTorniquete());
-                    row.createCell(1).setCellValue(t.getEntradaBoleto());
-                    row.createCell(2).setCellValue(t.getEntradaTarjeta());
-                    row.createCell(3).setCellValue(t.getEntradaBoleto() + t.getEntradaTarjeta());
-                    row.createCell(4).setCellValue(estado(t.getEstado()));
-                    row.createCell(5).setCellValue(fecha(b.getFecha()));
-                }
-            }
-
-            for (Row r : page)
-            {
-                for (Cell c : r)
-                {
-                    c.setCellStyle(style);
-                }
-            }
-
-            page.autoSizeColumn(4);
-            page.autoSizeColumn(5);
-
-            excel.write(file);
-            file.close();
-            AccesoDAO.close();
-
-            success = true;
-        }
-        catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-
-        return success;
-    }
-
-    private String fecha(Date d)
-    {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy' 'hh:mm:ss a");
-        return format.format(d);
-    }
-
-    private String estado(int e)
-    {
-        switch (e)
-        {
-            case 0:
-                return "Error";
-            case 1:
-                return "Boleto inhabilitado";
-            case 2:
-                return "Habilitado";
-        }
-
-        return null;
-    }
 }

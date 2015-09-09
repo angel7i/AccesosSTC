@@ -1,6 +1,7 @@
 package control;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ConnectException;
@@ -24,7 +25,9 @@ public class ConMicro
     {
         try
         {
-            ip = InetAddress.getByName("11.83.10.50");
+//            ip = InetAddress.getByName("11.83.10.50");     }
+            ip = InetAddress.getByName("15.59.252.27");
+
         }
         catch (IOException e)
         {
@@ -66,52 +69,63 @@ public class ConMicro
             }
             while (!data.toString().startsWith("@"));
 
+            String trama = data.toString().replace("@", "").replace("*","");
+
             info = new HashMap<>();
             info.put("DATE", new Date());
-            String trama = data.toString().replace("@", "").trim();
 
-
-            trama = trama.substring(trama.indexOf("#") + 2);
-            info.put("T1N", trama.substring(trama.indexOf("N"), trama.indexOf("N") + 4));
-            trama = trama.substring(trama.indexOf("B1"));
-            info.put("B1", trama.substring(trama.indexOf("B1")+3, trama.indexOf("B1")+9));
+            trama = trama.substring(trama.indexOf("#") + 3);
+            info.put("T1N", "E018");
+            info.put("FASE", "Fase 4");
+            info.put("B1", trama.substring(trama.indexOf("B1") + 2, trama.indexOf("B1") + 8));
             trama = trama.substring(trama.indexOf("T1"));
-            info.put("T1", trama.substring(trama.indexOf("T1") + 3, trama.indexOf("T1") + 9));
-            String es1 = trama.substring(trama.indexOf("F1")+ 3, trama.indexOf("F1") + 4) +
-                    trama.substring(trama.indexOf("C1")+ 3, trama.indexOf("C1") + 4);
-            trama = trama.substring(trama.indexOf("N"));
+            info.put("T1", trama.substring(trama.indexOf("T1") + 2, trama.indexOf("T1") + 8));
+            trama = trama.substring(trama.indexOf("P1"));
+            info.put("P1", trama.substring(trama.indexOf("P1") + 2, trama.indexOf("P1") + 8));
+            String es1 = trama.substring(trama.indexOf("F1") + 2, trama.indexOf("F1") + 3) +
+                    trama.substring(trama.indexOf("C1")+ 2, trama.indexOf("C1") + 3);
             info.put("ES1", estado(es1));
-            info.put("T2N", trama.substring(trama.indexOf("N"), trama.indexOf("N") + 4));
-            trama = trama.substring(trama.indexOf("B2"));
-            info.put("B2", trama.substring(trama.indexOf("B2")+3, trama.indexOf("B2")+9));
+            trama = trama.substring(trama.indexOf("N"));
+
+            info.put("T2N", "E019");
+            info.put("FASE", "Fase 4");
+            info.put("B2", trama.substring(trama.indexOf("B2") + 2, trama.indexOf("B2") + 8));
             trama = trama.substring(trama.indexOf("T2"));
-            info.put("T2", trama.substring(trama.indexOf("T2") + 3, trama.indexOf("T2") + 9));
-            String es2 = trama.substring(trama.indexOf("F2")+ 3, trama.indexOf("F2") + 4) +
-                    trama.substring(trama.indexOf("C2")+ 3, trama.indexOf("C2") + 4);
-            trama = trama.substring(trama.indexOf("N"));
+            info.put("T2", trama.substring(trama.indexOf("T2") + 2, trama.indexOf("T2") + 8));
+            trama = trama.substring(trama.indexOf("P2"));
+            info.put("P2", trama.substring(trama.indexOf("P2") + 2, trama.indexOf("P2") + 8));
+            String es2 = trama.substring(trama.indexOf("F2") + 2, trama.indexOf("F2") + 3) +
+                    trama.substring(trama.indexOf("C2")+ 2, trama.indexOf("C2") + 3);
             info.put("ES2", estado(es2));
-            info.put("T3N", trama.substring(trama.indexOf("N"), trama.indexOf("N") + 4));
-            trama = trama.substring(trama.indexOf("B3"));
-            info.put("B3", trama.substring(trama.indexOf("B3")+3, trama.indexOf("B3")+9));
-            trama = trama.substring(trama.indexOf("T3"));
-            info.put("T3", trama.substring(trama.indexOf("T3") + 3, trama.indexOf("T3") + 9));
-            String es3 = trama.substring(trama.indexOf("F3")+ 3, trama.indexOf("F3") + 4) +
-                    trama.substring(trama.indexOf("C3")+ 3, trama.indexOf("C3") + 4);
             trama = trama.substring(trama.indexOf("N"));
+
+            info.put("T3N", "E020");
+            info.put("FASE", "Fase 2");
+            info.put("B3", trama.substring(trama.indexOf("B3") + 2, trama.indexOf("B3") + 8));
+            trama = trama.substring(trama.indexOf("T3"));
+            info.put("T3", trama.substring(trama.indexOf("T3") + 2, trama.indexOf("T3") + 8));
+            trama = trama.substring(trama.indexOf("P3"));
+            info.put("P3", trama.substring(trama.indexOf("P3") + 2, trama.indexOf("P3") + 8));
+            String es3 = trama.substring(trama.indexOf("F3") + 2, trama.indexOf("F3") + 3) +
+                    trama.substring(trama.indexOf("C3")+ 2, trama.indexOf("C3") + 3);
             info.put("ES3", estado(es3));
-            info.put("T4N", trama.substring(trama.indexOf("N"), trama.indexOf("N") + 4));
-            trama = trama.substring(trama.indexOf("B4"));
-            info.put("B4", trama.substring(trama.indexOf("B4")+3, trama.indexOf("B4")+9));
+            trama = trama.substring(trama.indexOf("N"));
+
+            info.put("T4N", "E021");
+            info.put("FASE", "Fase 2");
+            info.put("B4", trama.substring(trama.indexOf("B4") + 2, trama.indexOf("B4") + 8));
             trama = trama.substring(trama.indexOf("T4"));
-            info.put("T4", trama.substring(trama.indexOf("T4") + 3, trama.indexOf("T4") + 9));
-            String es4 = trama.substring(trama.indexOf("F4")+ 3, trama.indexOf("F4") + 4) +
-                    trama.substring(trama.indexOf("C4")+ 3, trama.indexOf("C4") + 4);
+            info.put("T4", trama.substring(trama.indexOf("T4") + 2, trama.indexOf("T4") + 8));
+            trama = trama.substring(trama.indexOf("P4"));
+            info.put("P4", trama.substring(trama.indexOf("P4") + 2, trama.indexOf("P4") + 8));
+            String es4    = trama.substring(trama.indexOf("F4") + 2, trama.indexOf("F4") + 3) +
+                    trama.substring(trama.indexOf("C4")+ 2, trama.indexOf("C4") + 3);
             info.put("ES4", estado(es4));
 
-//            for (Map.Entry<String, Object> s : info.entrySet())
-//            {
-//                System.out.println(s.getKey() + ":" + s.getValue());
-//            }
+            for (Map.Entry<String, Object> s : info.entrySet())
+            {
+                System.out.println(s.getKey() + ":" + s.getValue());
+            }
         }
         catch (SocketTimeoutException e)
         {
@@ -163,7 +177,6 @@ public class ConMicro
 
     public static void main(String[] args)
     {
-//        ConMicro r = new ConMicro();
-//        r.getTrama();
+        new ConMicro().getTrama();
     }
 }

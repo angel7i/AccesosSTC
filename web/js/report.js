@@ -33,7 +33,6 @@ $(document).ready(function()
             }
         }
     );
-<<<<<<< HEAD
     $('#buscar').puibutton(
         {
             icon: 'fa-search'
@@ -44,10 +43,7 @@ $(document).ready(function()
             icon: 'fa-file-excel-o'
         }
     );
-=======
-    $('#buscar').puibutton();
-    $('#toExcel').puibutton();
->>>>>>> origin/master
+    $('#toExcel').puibutton('disable');
 
     $('#buscar').on("click", function()
     {
@@ -75,7 +71,7 @@ $(document).ready(function()
                             {field:'boleto', headerText: 'Boletos', sortable:true},
                             {field:'tarjeta', headerText: 'Tarjeta', sortable:true},
                             {field:'total', headerText: 'Total', sortable:true},
-                            //{field:'noaut', headerText: 'No Autorizado'},
+                            {field:'noautorizado', headerText: 'No Autorizado'},
                             {field:'estado', headerText: 'Estado', content: getState},
                             {field:'fecha', headerText: 'Fecha', sortable:true, content: format}
                         ],
@@ -97,6 +93,7 @@ $(document).ready(function()
                                 else
                                 {
                                     callback.call(this, response);
+                                    $("#toExcel").puibutton("enable");
                                 }
                             },
                             error: function (textStatus, errorThrown)
@@ -115,6 +112,7 @@ $(document).ready(function()
                         $('#messages').remove();
                         var message = "<div id='messages' title='Detalle' style='position: fixed; display: inline-block'>" +
                             "Torniquete: " + data.torniq + "<br>" +
+                            data.fase + "<br>" +
                             "Boletos :" + data.boleto + "<br>" +
                             "Tarjeta: " + data.tarjeta + "<br>" +
                             "Total: " + data.total + "<br>" +
@@ -132,57 +130,55 @@ $(document).ready(function()
                         $('#messages').remove();
                     }
                 });
-            $('#toExcel').puibutton('enable');
         }
     });
 
-    $('#toExcel').on('click', function()
-    {
-<<<<<<< HEAD
-
-
-        var from = $("#dateFrom").val();
-        var to = $("#dateTo").val();
-
-        $.ajax(
-            {
-                type: 'POST',
-                url: 'toExcel',
-                data: "from=" + from + "&to=" + to,
-                dataType: 'json',
-                context: this,
-                success: function(data)
-                {
-                    if (data.response == "Error")
-                    {
-                        console.log(data.response);
-                    }
-                    else
-                    {
-                        console.log(data.response);
-                    }
-                },
-                error: function (textStatus, errorThrown)
-                {
-                    console.log("Error->" + errorThrown + ' : ' + textStatus);
-                }
-            });
-=======
-        alert("Pronto :)");
->>>>>>> origin/master
-    });
+    //$('#toExcel').on('click', function()
+    //{
+    //    var from = $("#dateFrom").val();
+    //    var to = $("#dateTo").val();
+    //
+    //    if (from.length == 0 && to.length == 0)
+    //        return;
+    //
+    //    $.ajax(
+    //        {
+    //            type: 'POST',
+    //            url: 'toExcel',
+    //            data: "from=" + from + "&to=" + to,
+    //            dataType: 'json',
+    //            context: this,
+    //            success: function(data)
+    //            {
+    //                if (data.response == "Error")
+    //                {
+    //                    console.log(data.response);
+    //                }
+    //                else
+    //                {
+    //
+    //                }
+    //            },
+    //            error: function (textStatus, errorThrown)
+    //            {
+    //                console.log("Error->" + errorThrown + ' : ' + textStatus);
+    //            }
+    //        });
+    //
+    //
+    //});
 });
 
 
 function getState(data)
 {
-    if (data.estado == "Funcionando")
+    if (data.estado == "Habilitado")
     {
         return $("<div title='Estado'>" +
                 "<img src='img/ok.png' width='50px' />" +
                 "</div>");
     }
-    else if (data.estado == "No funciona boleto")
+    else if (data.estado == "Boleto inhabilitado")
     {
         return $("<div title='Estado'>" +
                 "<img src='img/notpass.png' width='50px' />" +

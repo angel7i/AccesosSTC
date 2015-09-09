@@ -1,5 +1,5 @@
 package tables;
-// Generated Jul 17, 2015 1:56:51 PM by Hibernate Tools 4.3.1
+// Generated Sep 2, 2015 4:24:31 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,7 +26,7 @@ public class Estacion  implements java.io.Serializable {
      private int idEstacion;
      private Linea linea;
      private String nombre;
-     private Set<Bateria> baterias = new HashSet(0);
+     private Set<Bateria> baterias = new HashSet<Bateria>(0);
 
     public Estacion() {
     }
@@ -36,7 +36,7 @@ public class Estacion  implements java.io.Serializable {
         this.idEstacion = idEstacion;
         this.linea = linea;
     }
-    public Estacion(int idEstacion, Linea linea, String nombre, Set baterias) {
+    public Estacion(int idEstacion, Linea linea, String nombre, Set<Bateria> baterias) {
        this.idEstacion = idEstacion;
        this.linea = linea;
        this.nombre = nombre;

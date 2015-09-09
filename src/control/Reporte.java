@@ -31,6 +31,7 @@ public class Reporte extends HttpServlet
 
             if (list != null)
             {
+                Excel.doExcel(list);
                 resp.getWriter().print(json(list));
             }
             else
@@ -68,9 +69,11 @@ public class Reporte extends HttpServlet
                 {
                     JsonObject object = Json.createObjectBuilder().
                             add("torniq", t.getTorniquete()).
+                            add("fase", t.getFase()).
                             add("boleto", t.getEntradaBoleto()).
                             add("tarjeta", t.getEntradaTarjeta()).
-                            add("total", t.getEntradaBoleto() + t.getEntradaTarjeta()).
+                            add("noatorizado", t.getNoAutorizado()).
+                            add("total", t.getEntradaBoleto() + t.getEntradaTarjeta() + t.getNoAutorizado()).
                             add("estado", estado(t.getEstado())).
                             add("fecha", fecha(b.getFecha())).build();
                     array.add(object);
@@ -119,9 +122,9 @@ public class Reporte extends HttpServlet
             case 0:
                 return "Error";
             case 1:
-                return "No funciona boleto";
+                return "Boleto inhabilitado";
             case 2:
-                return "Funcionando";
+                return "Habilitado";
         }
 
         return null;
