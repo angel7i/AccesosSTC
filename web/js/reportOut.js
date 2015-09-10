@@ -10,9 +10,9 @@ $(document).ready(function()
                 var df = date.dateFormat("Y/m/d");
 
                 this.setOptions(
-                {
-                    maxDate: date != null ? df : new Date()
-                })
+                    {
+                        maxDate: date != null ? df : new Date()
+                    })
             }
         }
     );
@@ -26,10 +26,10 @@ $(document).ready(function()
                 var df = date.dateFormat("Y/m/d");
 
                 this.setOptions(
-                {
-                    maxDate: new Date(),
-                    minDate: $('#dateFrom').val() ? df : false
-                })
+                    {
+                        maxDate: new Date(),
+                        minDate: $('#dateFrom').val() ? df : false
+                    })
             }
         }
     );
@@ -68,39 +68,35 @@ $(document).ready(function()
                             //{field:'estacion', headerText: 'Estacion'},
                             //{field:'acceso', headerText: 'Acceso'},
                             {field:'torniq', headerText: 'Torniquete', sortable:true},
-                            {field:'boleto', headerText: 'Boletos', sortable:true},
-                            {field:'tarjeta', headerText: 'Tarjeta', sortable:true},
-                            {field:'total', headerText: 'Total', sortable:true},
-                            {field:'noautorizado', headerText: 'No Autorizado'},
-                            {field:'estado', headerText: 'Estado', content: getState},
+                            {field:'salida', headerText: 'Salidas', sortable:true},
                             {field:'fecha', headerText: 'Fecha', sortable:true, content: format}
                         ],
                     datasource: function(callback)
                     {
                         $.ajax(
-                        {
-                            type: 'POST',
-                            url: 'reporte',
-                            data: "from=" + from + "&to=" + to,
-                            dataType: 'json',
-                            context: this,
-                            success: function(response)
                             {
-                                if (response.error)
+                                type: 'POST',
+                                url: 'reporteSalida',
+                                data: "from=" + from + "&to=" + to,
+                                dataType: 'json',
+                                context: this,
+                                success: function(response)
                                 {
-                                    console.log(response.error);
-                                }
-                                else
+                                    if (response.error)
+                                    {
+                                        console.log(response.error);
+                                    }
+                                    else
+                                    {
+                                        callback.call(this, response);
+                                        $("#toExcel").puibutton("enable");
+                                    }
+                                },
+                                error: function (textStatus, errorThrown)
                                 {
-                                    callback.call(this, response);
-                                    $("#toExcel").puibutton("enable");
+                                    console.log("Error->" + errorThrown + ' : ' + textStatus);
                                 }
-                            },
-                            error: function (textStatus, errorThrown)
-                            {
-                                console.log("Error->" + errorThrown + ' : ' + textStatus);
-                            }
-                        });
+                            });
                     },
                     paginator:
                     {
@@ -113,17 +109,14 @@ $(document).ready(function()
                         var message = "<div id='messages' title='Detalle' style='position: fixed; display: inline-block'>" +
                             "Torniquete: " + data.torniq + "<br>" +
                             data.fase + "<br>" +
-                            "Boletos :" + data.boleto + "<br>" +
-                            "Tarjeta: " + data.tarjeta + "<br>" +
-                            "Total: " + data.total + "<br>" +
-                            "Estado: "  + data.estado +  "<br>" +
+                            "Salidas :" + data.salida + "<br>" +
                             "Fecha: " + data.fecha +  "<br>" +
                             "</div>";
                         $("#nextReport").after(message);
                         $('#messages').puidialog(
-                        {
-                            closable: true
-                        });
+                            {
+                                closable: true
+                            });
                     },
                     rowUnselect: function(event, data)
                     {
@@ -169,28 +162,6 @@ $(document).ready(function()
     //});
 });
 
-
-function getState(data)
-{
-    if (data.estado == "Habilitado")
-    {
-        return $("<div title='Estado'>" +
-                "<img src='img/ok.png' width='50px' />" +
-                "</div>");
-    }
-    else if (data.estado == "Boleto inhabilitado")
-    {
-        return $("<div title='Estado'>" +
-                "<img src='img/notpass.png' width='50px' />" +
-                "</div>");
-    }
-    else
-    {
-        return $("<div title='Estado'>" +
-                "<img src='img/error.png' width='50px'/>" +
-                "</div>");
-    }
-}
 
 function format(data)
 {

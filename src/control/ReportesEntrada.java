@@ -1,7 +1,7 @@
 package control;
 
-import tables.Bateria;
-import tables.Torniquete;
+import model.Bateriaentrada;
+import model.Torniqueteentrada;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -17,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet(name = "Reporte", urlPatterns = "/reporte")
-public class Reporte extends HttpServlet
+@WebServlet(name = "ReportesEntrada", urlPatterns = "/reporteEntrada")
+public class ReportesEntrada extends HttpServlet
 {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -27,7 +27,7 @@ public class Reporte extends HttpServlet
         {
             Date from = toDate(req.getParameter("from"));
             Date to = toDate(req.getParameter("to"));
-            List list = AccesoDAO.getEntradas(from, to);
+            List list = AccesosDAO.getEntradas(from, to);
 
             if (list != null)
             {
@@ -63,16 +63,16 @@ public class Reporte extends HttpServlet
 
             for (Object o : l)
             {
-                Bateria b = (Bateria) o;
+                Bateriaentrada b = (Bateriaentrada) o;
 
-                for (Torniquete t : b.getTorniquetes())
+                for (Torniqueteentrada t : b.getTorniqueteentradas())
                 {
                     JsonObject object = Json.createObjectBuilder().
                             add("torniq", t.getTorniquete()).
                             add("fase", t.getFase()).
                             add("boleto", t.getEntradaBoleto()).
                             add("tarjeta", t.getEntradaTarjeta()).
-                            add("noatorizado", t.getNoAutorizado()).
+                            add("noautorizado", t.getNoAutorizado()).
                             add("total", t.getEntradaBoleto() + t.getEntradaTarjeta() + t.getNoAutorizado()).
                             add("estado", estado(t.getEstado())).
                             add("fecha", fecha(b.getFecha())).build();
@@ -80,7 +80,7 @@ public class Reporte extends HttpServlet
                 }
             }
 
-            AccesoDAO.close();
+            AccesosDAO.close();
         }
         catch (Exception e)
         {

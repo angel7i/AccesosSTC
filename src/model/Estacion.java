@@ -1,5 +1,5 @@
-package tables;
-// Generated Sep 2, 2015 4:24:31 PM by Hibernate Tools 4.3.1
+package model;
+// Generated 10/09/2015 03:38:43 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -26,7 +26,8 @@ public class Estacion  implements java.io.Serializable {
      private int idEstacion;
      private Linea linea;
      private String nombre;
-     private Set<Bateria> baterias = new HashSet<Bateria>(0);
+     private Set<Bateriaentrada> bateriaentradas = new HashSet<Bateriaentrada>(0);
+     private Set<Bateriasalida> bateriasalidas = new HashSet<Bateriasalida>(0);
 
     public Estacion() {
     }
@@ -36,11 +37,12 @@ public class Estacion  implements java.io.Serializable {
         this.idEstacion = idEstacion;
         this.linea = linea;
     }
-    public Estacion(int idEstacion, Linea linea, String nombre, Set<Bateria> baterias) {
+    public Estacion(int idEstacion, Linea linea, String nombre, Set<Bateriaentrada> bateriaentradas, Set<Bateriasalida> bateriasalidas) {
        this.idEstacion = idEstacion;
        this.linea = linea;
        this.nombre = nombre;
-       this.baterias = baterias;
+       this.bateriaentradas = bateriaentradas;
+       this.bateriasalidas = bateriasalidas;
     }
    
      @Id 
@@ -76,12 +78,21 @@ public class Estacion  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="estacion")
-    public Set<Bateria> getBaterias() {
-        return this.baterias;
+    public Set<Bateriaentrada> getBateriaentradas() {
+        return this.bateriaentradas;
     }
     
-    public void setBaterias(Set<Bateria> baterias) {
-        this.baterias = baterias;
+    public void setBateriaentradas(Set<Bateriaentrada> bateriaentradas) {
+        this.bateriaentradas = bateriaentradas;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="estacion")
+    public Set<Bateriasalida> getBateriasalidas() {
+        return this.bateriasalidas;
+    }
+    
+    public void setBateriasalidas(Set<Bateriasalida> bateriasalidas) {
+        this.bateriasalidas = bateriasalidas;
     }
 
 

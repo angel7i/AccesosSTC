@@ -17,9 +17,11 @@
     <property name="hibernate.c3p0.max_statements">50</property>
     <property name="hibernate.c3p0.idle_test_period">100</property>
 
-    <mapping class="tables.Torniquete"/>
-    <mapping class="tables.Bateria"/>
-    <mapping class="tables.Estacion"/>
-    <mapping class="tables.Linea"/>
+    <mapping class="model.Torniqueteentrada"/>
+    <mapping class="model.Bateriaentrada"/>
+    <mapping class="model.Torniquetesalida"/>
+    <mapping class="model.Bateriasalida"/>
+    <mapping class="model.Estacion"/>
+    <mapping class="model.Linea"/>
   </session-factory>
 </hibernate-configuration>

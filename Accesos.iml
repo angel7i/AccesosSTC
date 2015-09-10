@@ -32,6 +32,6 @@
     <orderEntry type="library" name="Json" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.35-bin" level="project" />
-    <orderEntry type="library" name="Apache Poi-3.12-20150511" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Apache Poi-3.12-20150511" level="project" />
   </component>
 </module>

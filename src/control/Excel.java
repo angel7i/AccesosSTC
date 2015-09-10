@@ -1,5 +1,7 @@
 package control;
 
+import model.Bateriaentrada;
+import model.Torniqueteentrada;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -8,8 +10,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
-import tables.Bateria;
-import tables.Torniquete;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +44,7 @@ public class Excel
             header.createCell(1).setCellValue("Boletos");
             header.createCell(2).setCellValue("Tarjeta");
             header.createCell(3).setCellValue("Total");
-            header.createCell(4).setCellValue("Estado");
+            header.createCell(4).setCellValue("Entradas");
             header.createCell(5).setCellValue("Fecha");
 
             HSSFCellStyle style = excel.createCellStyle();
@@ -57,9 +58,9 @@ public class Excel
 
             for (Object o : query)
             {
-                Bateria b = (Bateria) o;
+                Bateriaentrada b = (Bateriaentrada) o;
 
-                for (Torniquete t : b.getTorniquetes())
+                for (Torniqueteentrada t : b.getTorniqueteentradas())
                 {
                     HSSFRow row = page.createRow(page.getLastRowNum() + 1);
                     row.createCell(0).setCellValue(t.getTorniquete());
@@ -84,7 +85,7 @@ public class Excel
 
             excel.write(file);
             file.close();
-            AccesoDAO.close();
+            AccesosDAO.close();
 
             success = fileXLS.getAbsolutePath();
         }

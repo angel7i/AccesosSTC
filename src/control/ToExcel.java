@@ -1,25 +1,11 @@
 package control;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import tables.Bateria;
-import tables.Torniquete;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +23,7 @@ public class ToExcel extends HttpServlet
             Date from = toDate(req.getParameter("from"));
             Date to = toDate(req.getParameter("to"));
 
-            List list = AccesoDAO.getEntradas(from, to);
+            List list = AccesosDAO.getEntradas(from, to);
             String p = null;
 
             if (list != null)
@@ -115,7 +101,7 @@ public class ToExcel extends HttpServlet
 //            header.createCell(1).setCellValue("Boletos");
 //            header.createCell(2).setCellValue("Tarjeta");
 //            header.createCell(3).setCellValue("Total");
-//            header.createCell(4).setCellValue("Estado");
+//            header.createCell(4).setCellValue("Entradas");
 //            header.createCell(5).setCellValue("Fecha");
 //
 //            HSSFCellStyle style = excel.createCellStyle();
@@ -156,7 +142,7 @@ public class ToExcel extends HttpServlet
 //
 //            excel.write(file);
 //            file.close();
-//            AccesoDAO.close();
+//            AccesosDAO.close();
 //
 //            success = fileXLS.getAbsolutePath();
 //        }

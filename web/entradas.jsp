@@ -1,3 +1,4 @@
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -15,6 +16,7 @@
   <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="js/primeui/primeui-2.0-min.css" />
   <link rel="stylesheet" href="css/jquery-ui-themes-1.11.4/themes/ui-lightness/jquery-ui.min.css" />
+  <link rel="stylesheet" href="js/datetimepicker-master/jquery.datetimepicker.css" />
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
@@ -46,7 +48,7 @@
         </a>
       </li>
       <li class="sub-menu">
-        <a href="entradas.jsp" >
+        <a href="salidas.jsp" >
           <span>Salidas</span>
         </a>
       </li>
@@ -56,13 +58,21 @@
 
 <section id="main-content">
   <section class="wrapper">
-    <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Acceso Nororiente</h3>
+
+    <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Entrada Nororiente</h3>
     <hr>
-    <button id="bt1" type="button">Guardar</button>
-    <hr>
-    <div id="tentrada"></div>
-    <hr>
-    <div id="tsalida"></div>
+
+    <label for="dateFrom">De: </label><input type="text" id="dateFrom">
+    <label for="dateTo">A: </label><input type="text" id="dateTo">
+    <button id="buscar" type="button">Buscar</button>
+    <%String path= System.getProperty("user.home") +
+            File.separator + "Downloads" + File.separator +
+            "ReporteTorniquetes.xls";%>
+    <a href="<%=path%>" id="toExcel" download="ReporteTorniquetes.xls">Exportar a Excel</a>
+    <%--<a href="<%=path%>"  download="ReporteTorniquetes.xls">Exportar a Excel</a>--%>
+
+    <hr id="nextReport">
+
   </section>
 </section>
 
@@ -75,6 +85,7 @@
 <script src="js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 <script src="js/primeui/primeui-2.0-min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="js/control.js"></script>
+<script src="js/datetimepicker-master/jquery.datetimepicker.js"></script>
+<script src="js/reportIn.js"></script>
 </body>
 </html>

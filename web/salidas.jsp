@@ -43,8 +43,13 @@
         </a>
       </li>
       <li class="sub-menu">
-        <a href="reporte.jsp" >
-          <span>Reportes</span>
+        <a href="entradas.jsp" >
+          <span>Entradas</span>
+        </a>
+      </li>
+      <li class="sub-menu">
+        <a href="salidas.jsp" >
+          <span>Salidas</span>
         </a>
       </li>
     </ul>
@@ -54,7 +59,7 @@
 <section id="main-content">
   <section class="wrapper">
 
-    <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Entrada Nororiente</h3>
+    <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Salida Nororiente</h3>
     <hr>
 
     <label for="dateFrom">De: </label><input type="text" id="dateFrom">
@@ -64,7 +69,7 @@
             File.separator + "Downloads" + File.separator +
             "ReporteTorniquetes.xls";%>
     <a href="<%=path%>" id="toExcel" download="ReporteTorniquetes.xls">Exportar a Excel</a>
-    <a href="<%=path%>"  download="ReporteTorniquetes.xls">Exportar a Excel</a>
+    <%--<a href="<%=path%>"  download="ReporteTorniquetes.xls">Exportar a Excel</a>--%>
 
     <hr id="nextReport">
 
@@ -81,6 +86,6 @@
 <script src="js/primeui/primeui-2.0-min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/datetimepicker-master/jquery.datetimepicker.js"></script>
-<script src="js/report.js"></script>
+<script src="js/reportOut.js"></script>
 </body>
 </html>

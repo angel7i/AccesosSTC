@@ -3346,7 +3346,7 @@ jQuery.support = (function( support ) {
 	support.leadingWhitespace = div.firstChild.nodeType === 3;
 
 	// Make sure that tbody elements aren't automatically inserted
-	// IE will insert them into empty tables
+	// IE will insert them into empty model
 	support.tbody = !div.getElementsByTagName("tbody").length;
 
 	// Make sure that link elements get serialized correctly by innerHTML
@@ -6294,7 +6294,7 @@ jQuery.fn.extend({
 });
 
 // Support: IE<8
-// Manipulating tables requires a tbody
+// Manipulating model requires a tbody
 function manipulationTarget( elem, content ) {
 	return jQuery.nodeName( elem, "table" ) &&
 		jQuery.nodeName( content.nodeType === 1 ? content : content.firstChild, "tr" ) ?

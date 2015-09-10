@@ -1,7 +1,6 @@
 package control;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ConnectException;
@@ -13,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ConMicro
+public class ConMicroEntrada
 {
     private InetAddress ip;
     private Socket socket;
@@ -21,7 +20,7 @@ public class ConMicro
     private BufferedReader br;
     Scanner scanner;
 
-    public ConMicro()
+    public ConMicroEntrada()
     {
         try
         {
@@ -76,7 +75,7 @@ public class ConMicro
 
             trama = trama.substring(trama.indexOf("#") + 3);
             info.put("T1N", "E018");
-            info.put("FASE", "Fase 4");
+            info.put("FASE1", "Fase 4");
             info.put("B1", trama.substring(trama.indexOf("B1") + 2, trama.indexOf("B1") + 8));
             trama = trama.substring(trama.indexOf("T1"));
             info.put("T1", trama.substring(trama.indexOf("T1") + 2, trama.indexOf("T1") + 8));
@@ -88,7 +87,7 @@ public class ConMicro
             trama = trama.substring(trama.indexOf("N"));
 
             info.put("T2N", "E019");
-            info.put("FASE", "Fase 4");
+            info.put("FASE2", "Fase 4");
             info.put("B2", trama.substring(trama.indexOf("B2") + 2, trama.indexOf("B2") + 8));
             trama = trama.substring(trama.indexOf("T2"));
             info.put("T2", trama.substring(trama.indexOf("T2") + 2, trama.indexOf("T2") + 8));
@@ -100,7 +99,7 @@ public class ConMicro
             trama = trama.substring(trama.indexOf("N"));
 
             info.put("T3N", "E020");
-            info.put("FASE", "Fase 2");
+            info.put("FASE3", "Fase 2");
             info.put("B3", trama.substring(trama.indexOf("B3") + 2, trama.indexOf("B3") + 8));
             trama = trama.substring(trama.indexOf("T3"));
             info.put("T3", trama.substring(trama.indexOf("T3") + 2, trama.indexOf("T3") + 8));
@@ -112,7 +111,7 @@ public class ConMicro
             trama = trama.substring(trama.indexOf("N"));
 
             info.put("T4N", "E021");
-            info.put("FASE", "Fase 2");
+            info.put("FASE4", "Fase 2");
             info.put("B4", trama.substring(trama.indexOf("B4") + 2, trama.indexOf("B4") + 8));
             trama = trama.substring(trama.indexOf("T4"));
             info.put("T4", trama.substring(trama.indexOf("T4") + 2, trama.indexOf("T4") + 8));
@@ -166,9 +165,9 @@ public class ConMicro
             case "00":     // Error
             case "11":
                 return 0;
-            case "01":     // No funciona boleto
+            case "01":     // Boleto inhabilitado
                 return 1;
-            case "10":     // Boleto y Tarjeta funcionando
+            case "10":     // Boleto y Tarjeta habilitado
                 return 2;
         }
 
@@ -177,6 +176,6 @@ public class ConMicro
 
     public static void main(String[] args)
     {
-        new ConMicro().getTrama();
+        new ConMicroEntrada().getTrama();
     }
 }

@@ -10,15 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet(name = "Estado", urlPatterns = "/estado")
-public class Estado extends HttpServlet
+@WebServlet(name = "Entradas", urlPatterns = "/entradas")
+public class Entradas extends HttpServlet
 {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
     {
         try
         {
-            Map<String, Object> trama = AccesoDAO.insertEntradas();
+            Map<String, Object> trama = AccesosDAO.insertEntradas();
 
             if (trama != null)
             {
@@ -60,7 +60,7 @@ public class Estado extends HttpServlet
                 add("torniq", trama.get("T2N").toString()).
                 add("boleto", Integer.parseInt(trama.get("B2").toString())).
                 add("tarjeta", Integer.parseInt(trama.get("T2").toString())).
-                add("noautorizado", Integer.parseInt(trama.get("P").toString())).
+                add("noautorizado", Integer.parseInt(trama.get("P2").toString())).
                 add("total", Integer.parseInt(trama.get("B2").toString())
                         + Integer.parseInt(trama.get("T2").toString())
                         + Integer.parseInt(trama.get("P2").toString())).
