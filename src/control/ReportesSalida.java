@@ -1,15 +1,12 @@
 package control;
 
-import model.Bateriaentrada;
 import model.Bateriasalida;
-import model.Torniqueteentrada;
 import model.Torniquetesalida;
 
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +27,13 @@ public class ReportesSalida extends HttpServlet
         {
             Date from = toDate(req.getParameter("from"));
             Date to = toDate(req.getParameter("to"));
-            List list = AccesosDAO.getSalidas(from, to);
+            List list = TorniquetesDAO.getSalidas(from, to);
 
             if (list != null)
             {
-//                Excel.doExcel(list);
+                String range = req.getParameter("from").split(" ")[0].replace("/", "") + "-" + req.getParameter("to").split(" ")[0].replace("/", "");
+
+                Excel.doExcelSalidas(list, getServletContext().getRealPath("/"), range);
                 resp.getWriter().print(json(list));
             }
             else
@@ -79,7 +78,7 @@ public class ReportesSalida extends HttpServlet
                 }
             }
 
-            AccesosDAO.close();
+            TorniquetesDAO.close();
         }
         catch (Exception e)
         {

@@ -329,7 +329,7 @@ $.cleanData = (function( orig ) {
 		for ( i = 0; (elem = elems[i]) != null; i++ ) {
 			try {
 
-				// Only trigger remove when necessary to save time
+				// Only trigger remove when necessary to monitorear time
 				events = $._data( elem, "events" );
 				if ( events && events.remove ) {
 					$( elem ).triggerHandler( "remove" );
@@ -3154,7 +3154,7 @@ $.widget( "ui.autocomplete", {
 	search: function( value, event ) {
 		value = value != null ? value : this._value();
 
-		// always save the actual value, not the one passed as an argument
+		// always monitorear the actual value, not the one passed as an argument
 		this.term = this._value();
 
 		if ( value.length < this.options.minLength ) {

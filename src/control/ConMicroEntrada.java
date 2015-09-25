@@ -7,6 +7,7 @@ import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,14 +19,14 @@ public class ConMicroEntrada
     private Socket socket;
     private PrintWriter pw;
     private BufferedReader br;
-    Scanner scanner;
+    private Scanner scanner;
 
     public ConMicroEntrada()
     {
         try
         {
-//            ip = InetAddress.getByName("11.83.10.50");     }
-            ip = InetAddress.getByName("15.59.252.27");
+            ip = InetAddress.getByName("11.83.10.50");
+//            ip = InetAddress.getByName("15.59.252.27");
 
         }
         catch (IOException e)
@@ -42,32 +43,22 @@ public class ConMicroEntrada
         try
         {
             socket = new Socket(ip, 5000);
-            socket.setSoTimeout(1000);
+            socket.setSoTimeout(500);
+            pw = new PrintWriter(socket.getOutputStream());
+            pw.print(1);
+            pw.flush();
+            scanner = new Scanner(socket.getInputStream());
 
-            if (!socket.isConnected())
+            while (scanner.hasNext())
             {
-                System.out.println("No hay conexion");
-                return info;
+                data.append(scanner.next() + " ");
             }
 
-            do
-            {
-                data.setLength(0);
-                pw = new PrintWriter(socket.getOutputStream());
-                pw.print(1);
-                pw.flush();
-                Thread.sleep(1000);
-                scanner = new Scanner(socket.getInputStream());
+            pw.close();
+            scanner.close();
+            socket.close();
 
-                while (scanner.hasNext())
-                {
-                    data.append(scanner.next() + " ");
-                }
-
-                System.out.println(data.toString());
-            }
-            while (!data.toString().startsWith("@"));
-
+            System.out.println(data.toString());
             String trama = data.toString().replace("@", "").replace("*","");
 
             info = new HashMap<>();
@@ -121,38 +112,24 @@ public class ConMicroEntrada
                     trama.substring(trama.indexOf("C4")+ 2, trama.indexOf("C4") + 3);
             info.put("ES4", estado(es4));
 
-            for (Map.Entry<String, Object> s : info.entrySet())
-            {
-                System.out.println(s.getKey() + ":" + s.getValue());
-            }
+//            for (Map.Entry<String, Object> s : info.entrySet())
+//            {
+//                System.out.println(s.getKey() + ":" + s.getValue());
+//            }
         }
         catch (SocketTimeoutException e)
         {
             System.out.println("Tiempo de respueta terminado");
+            return info;
         }
         catch (ConnectException e)
         {
             System.out.println("No hay conexion con el micro");
+            return info;
         }
         catch (Exception e)
         {
             e.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                if (pw != null && scanner != null)
-                {
-                    pw.close();
-                    scanner.close();
-                    socket.close();
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
         }
 
         return info;
@@ -176,6 +153,13 @@ public class ConMicroEntrada
 
     public static void main(String[] args)
     {
-        new ConMicroEntrada().getTrama();
+//        Calendar c= Calendar.getInstance();
+//        System.out.println(c.get(Calendar.HOUR_OF_DAY));
+//        System.out.println(c.get(Calendar.MINUTE));
+//        System.out.println(c.get(Calendar.SECOND));
+//        for (Map.Entry<?,?> e : System.getProperties().entrySet())
+//        {
+//            System.out.println(String.format("%s = %s", e.getKey(), e.getValue()));
+//        }
     }
 }

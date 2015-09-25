@@ -52,6 +52,11 @@
           <span>Salidas</span>
         </a>
       </li>
+      <li class="sub-menu">
+        <a href="monitor.jsp" >
+          <span>Monitoreo </span>
+        </a>
+      </li>
     </ul>
   </div>
 </aside>
@@ -65,11 +70,7 @@
     <label for="dateFrom">De: </label><input type="text" id="dateFrom">
     <label for="dateTo">A: </label><input type="text" id="dateTo">
     <button id="buscar" type="button">Buscar</button>
-    <%String path= System.getProperty("user.home") +
-            File.separator + "Downloads" + File.separator +
-            "ReporteTorniquetes.xls";%>
-    <a href="<%=path%>" id="toExcel" download="ReporteTorniquetes.xls">Exportar a Excel</a>
-    <%--<a href="<%=path%>"  download="ReporteTorniquetes.xls">Exportar a Excel</a>--%>
+    <a href="#" id="toExcel">Exportar a Excel</a>
 
     <hr id="nextReport">
 

@@ -8,17 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Map;
 
-@WebServlet(name = "Salidas", urlPatterns = "/salidas")
-public class Salidas extends HttpServlet
+@WebServlet(name = "MonitorearSalida", urlPatterns = "/monitorearSalida")
+public class MonitorearSalida extends HttpServlet
 {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
     {
         try
         {
-            Map<String, Object> trama = TorniquetesDAO.insertSalidas(null);
+            Calendar calendar = Calendar.getInstance();
+            ConMicroSalida microSalida = new ConMicroSalida();
+            Map<String, Object> trama = microSalida.getTrama();
 
             if (trama != null)
             {
@@ -29,6 +32,15 @@ public class Salidas extends HttpServlet
                 JsonObject e = Json.createObjectBuilder().
                         add("error", "Error").build();
                 resp.getWriter().print(e);
+            }
+
+            if ((calendar.get(Calendar.MINUTE) == 0 || calendar.get(Calendar.MINUTE) == 30)
+                    && calendar.get(Calendar.SECOND) == 0 )
+            {
+                System.out.println("Registro Salida - " + calendar.get(Calendar.HOUR_OF_DAY) + ":"
+                        + calendar.get(Calendar.MINUTE)
+                        + ":" + calendar.get(Calendar.SECOND));
+//                TorniquetesDAO.insertSalidas(trama);
             }
         }
         catch (IOException e)

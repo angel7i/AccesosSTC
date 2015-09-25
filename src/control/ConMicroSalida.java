@@ -41,32 +41,22 @@ public class ConMicroSalida
         try
         {
             socket = new Socket(ip, 5000);
-            socket.setSoTimeout(1000);
+            socket.setSoTimeout(500);
+            pw = new PrintWriter(socket.getOutputStream());
+            pw.print(1);
+            pw.flush();
+            scanner = new Scanner(socket.getInputStream());
 
-            if (!socket.isConnected())
+            while (scanner.hasNext())
             {
-                System.out.println("No hay conexion");
-                return info;
+                data.append(scanner.next() + " ");
             }
 
-            do
-            {
-                data.setLength(0);
-                pw = new PrintWriter(socket.getOutputStream());
-                pw.print(1);
-                pw.flush();
-                Thread.sleep(1000);
-                scanner = new Scanner(socket.getInputStream());
+            pw.close();
+            scanner.close();
+            socket.close();
 
-                while (scanner.hasNext())
-                {
-                    data.append(scanner.next() + " ");
-                }
-
-                System.out.println(data.toString());
-            }
-            while (!data.toString().startsWith("@"));
-
+            System.out.println(data.toString());
             String trama = data.toString().replace("@", "").replace("*","");
 
             info = new HashMap<>();
@@ -107,57 +97,27 @@ public class ConMicroSalida
             info.put("FASE7", "");
             info.put("S7", trama.substring(trama.indexOf("S7") + 2, trama.indexOf("S7") + 8));
 
-            for (Map.Entry<String, Object> s : info.entrySet())
-            {
-                System.out.println(s.getKey() + ":" + s.getValue());
-            }
+//            for (Map.Entry<String, Object> s : info.entrySet())
+//            {
+//                System.out.println(s.getKey() + ":" + s.getValue());
+//            }
         }
         catch (SocketTimeoutException e)
         {
-            System.out.println("Tiempo de respueta terminado");
+            System.out.println("Tiempo de respueta terminado2");
+            return info;
         }
         catch (ConnectException e)
         {
-            System.out.println("No hay conexion con el micro");
+            System.out.println("No hay conexion con el micro2");
+            return info;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
-                if (pw != null && scanner != null)
-                {
-                    pw.close();
-                    scanner.close();
-                    socket.close();
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
 
         return info;
-    }
-
-    private int estado(String s)
-    {
-        switch (s)
-        {
-            case "00":     // Error
-            case "11":
-                return 0;
-            case "01":     // Boleto inhabilitado
-                return 1;
-            case "10":     // Boleto y Tarjeta habilitado
-                return 2;
-        }
-
-        return 0;
     }
 
     public static void main(String[] args)

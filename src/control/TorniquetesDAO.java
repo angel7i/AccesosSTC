@@ -13,15 +13,17 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ManagedSessionContext;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class AccesosDAO
+public class TorniquetesDAO
 {
     private static SessionFactory sessionFactory;
     private static Session session;
@@ -63,11 +65,11 @@ public class AccesosDAO
         return sessionFactory;
     }
 
-    public static Map<String, Object> insertEntradas()
+    public static Map<String, Object> insertEntradas(Map<String, Object> t)
     {
         session = null;
         tr = null;
-        ConMicroEntrada micro = null;
+//        ConMicroEntrada micro = null;
         Map<String, Object> trama = null;
 
         try
@@ -75,8 +77,8 @@ public class AccesosDAO
             session = getSessionFactory().openSession();
             ManagedSessionContext.bind(session);
             tr = session.getTransaction();
-            micro = new ConMicroEntrada();
-            trama = micro.getTrama();
+//            micro = new ConMicroEntrada();
+            trama = t == null ? new ConMicroEntrada().getTrama() : t;
 
             if (trama ==  null) return null;
 
@@ -172,6 +174,7 @@ public class AccesosDAO
             cr.setFetchMode("Linea", FetchMode.JOIN);
             cr.setFetchMode("Torniqueteentrada", FetchMode.JOIN);
             cr.add(Restrictions.between("fecha", from, to));
+//            cr.addOrder(Order.asc("idTorniquete"));
             list = cr.list();
 
             if (!tr.wasCommitted())
@@ -186,11 +189,11 @@ public class AccesosDAO
         return list;
     }
 
-    public static Map<String, Object> insertSalidas()
+    public static Map<String, Object> insertSalidas(Map<String, Object> t)
     {
         session = null;
         tr = null;
-        ConMicroSalida micro = null;
+//        ConMicroSalida micro = null;
         Map<String, Object> trama = null;
 
         try
@@ -198,8 +201,8 @@ public class AccesosDAO
             session = getSessionFactory().openSession();
             ManagedSessionContext.bind(session);
             tr = session.getTransaction();
-            micro = new ConMicroSalida();
-            trama = micro.getTrama();
+//            micro = new ConMicroSalida();
+            trama = t == null ? new ConMicroSalida().getTrama() : t;
 
             if (trama ==  null) return null;
 
@@ -335,8 +338,8 @@ public class AccesosDAO
 //        Date f = new Date();
 //        Date t = new Date();
 //        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm");
-//        f = format.parse("2015/07/01 13:00");
-//        t = format.parse("2015/07/20 12:00");
+//        f = format.parse("2015/09/11 13:00");
+//        t = format.parse("2015/07/15 12:00");
 //
 //        System.out.println(f);
 //        System.out.println(t);

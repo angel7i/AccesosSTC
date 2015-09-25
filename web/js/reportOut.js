@@ -89,6 +89,8 @@ $(document).ready(function()
                                     else
                                     {
                                         callback.call(this, response);
+                                        var range = String(from).split(" ")[0].replace("/", "").replace("/", "") + "-" + String(to).split(" ")[0].replace("/", "").replace("/", "");
+                                        $("#toExcel").attr('href','http://localhost:8080/TorniquetesSalida' + range + '.xls');
                                         $("#toExcel").puibutton("enable");
                                     }
                                 },
@@ -125,41 +127,6 @@ $(document).ready(function()
                 });
         }
     });
-
-    //$('#toExcel').on('click', function()
-    //{
-    //    var from = $("#dateFrom").val();
-    //    var to = $("#dateTo").val();
-    //
-    //    if (from.length == 0 && to.length == 0)
-    //        return;
-    //
-    //    $.ajax(
-    //        {
-    //            type: 'POST',
-    //            url: 'toExcel',
-    //            data: "from=" + from + "&to=" + to,
-    //            dataType: 'json',
-    //            context: this,
-    //            success: function(data)
-    //            {
-    //                if (data.response == "Error")
-    //                {
-    //                    console.log(data.response);
-    //                }
-    //                else
-    //                {
-    //
-    //                }
-    //            },
-    //            error: function (textStatus, errorThrown)
-    //            {
-    //                console.log("Error->" + errorThrown + ' : ' + textStatus);
-    //            }
-    //        });
-    //
-    //
-    //});
 });
 
 

@@ -50,6 +50,11 @@
           <span>Salidas</span>
         </a>
       </li>
+      <li class="sub-menu">
+        <a href="monitor.jsp" >
+          <span>Monitoreo </span>
+        </a>
+      </li>
     </ul>
   </div>
 </aside>

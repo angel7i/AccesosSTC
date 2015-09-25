@@ -27,11 +27,12 @@ public class ReportesEntrada extends HttpServlet
         {
             Date from = toDate(req.getParameter("from"));
             Date to = toDate(req.getParameter("to"));
-            List list = AccesosDAO.getEntradas(from, to);
+            List list = TorniquetesDAO.getEntradas(from, to);
 
             if (list != null)
             {
-                Excel.doExcel(list);
+                String range = req.getParameter("from").split(" ")[0].replace("/", "") + "-" + req.getParameter("to").split(" ")[0].replace("/", "");
+                Excel.doExcelEntradas(list, getServletContext().getRealPath("/"), range);
                 resp.getWriter().print(json(list));
             }
             else
@@ -80,7 +81,7 @@ public class ReportesEntrada extends HttpServlet
                 }
             }
 
-            AccesosDAO.close();
+            TorniquetesDAO.close();
         }
         catch (Exception e)
         {

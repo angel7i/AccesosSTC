@@ -1,60 +1,16 @@
-var noClose =  false;
 var loop = false;
-var error = false;
 
 $(document).ready(function()
 {
-    $("#bt1").puibutton({
-        icon: 'fa fa-play'
-    });
-
-    $("#bt1").on("click", function()
-    {
-        if ($(this).html() == "Detener")
-        {
-            noClose = false;
-            clearInterval(loop);
-            $(this).hide();
-            $(this).html("Guardar");
-            $("#bt1").puibutton(
-                {
-                    icon: 'fa fa-play'
-                });
-            $(this).show();
-        }
-        else
-        {
-            save();
-
-            // Intervalo de captura de datos
-            // 1000 = 1 s
-            // 1800000 = 30 Min
-            // 3600000 = 1 H
-            if (!error)
-                loop = setInterval(save, 1800000);
-
-            noClose = true;
-            $(this).hide();
-            $(this).html("Detener");
-            $("#bt1").puibutton(
-                {
-                    icon: 'fa fa-stop'
-                });
-            $(this).show();
-        }
-
-    });
+    loop = setInterval(monitorear, 1100);
 
     $(window).on("beforeunload", function()
     {
-        if (noClose)
-        {
-            return "¿Se estan guardando datos desea salir?";
-        }
+        clearInterval(loop);
     });
 });
 
-function save()
+function monitorear()
 {
     $('#tentrada').puidatatable(
     {
@@ -73,10 +29,9 @@ function save()
         {
             $.ajax({
                 type: 'POST',
-                url: 'entradas',
+                url: 'monitorearEntrada',
                 dataType: 'json',
                 context: this,
-                //async: false,
                 success: function(response)
                 {
                     if (response.error)
@@ -90,7 +45,6 @@ function save()
                 },
                 error: function (textStatus, errorThrown)
                 {
-                    error = true;
                     console.log("Error->" + errorThrown + ' : ' + textStatus);
                 }
             });
@@ -111,10 +65,9 @@ function save()
             {
                 $.ajax({
                     type: 'POST',
-                    url: 'salidas',
+                    url: 'monitorearSalida',
                     dataType: 'json',
                     context: this,
-                    //async: false,
                     success: function(response)
                     {
                         if (response.error)
@@ -128,7 +81,6 @@ function save()
                     },
                     error: function (textStatus, errorThrown)
                     {
-                        error = true;
                         console.log("Error->" + errorThrown + ' : ' + textStatus);
                     }
                 });
