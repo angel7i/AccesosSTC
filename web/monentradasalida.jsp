@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
   <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="js/primeui/primeui-2.0-min.css" />
-  <link rel="stylesheet" href="css/jquery-ui-themes-1.11.4/themes/ui-lightness/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/jquery-ui-themes-1.11.4/themes/blitzer/jquery-ui.min.css" />
 
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
@@ -37,22 +37,22 @@
       <ul class="sidebar-menu" >
         <li class="sub-menu">
           <a href="index.jsp" >
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a href="repentradas.jsp" >
+            <span>Consultar Entradas</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a href="repsalidas.jsp" >
+            <span>Consultar Salidas</span>
+          </a>
+        </li>
+        <li class="sub-menu">
+          <a href="monentradasalida.jsp" >
             <span>Monitoreo de Torniquetes</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a href="entradas.jsp" >
-            <span>Entradas</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a href="entradas.jsp" >
-            <span>Salidas</span>
-          </a>
-        </li>
-        <li class="sub-menu">
-          <a href="monitor.jsp" >
-            <span>Monitoreo </span>
           </a>
         </li>
       </ul>
@@ -61,7 +61,9 @@
 
   <section id="main-content">
     <section class="wrapper">
-      <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Acceso Nororiente</h3>
+      <img class="estl" src="img/zaragoza.png"/>
+      <h3 style="display: inline-block"><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Salida Nororiente</h3>
+      <br>
       <hr>
       <div id="tentrada"></div>
       <hr>

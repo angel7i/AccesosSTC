@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
   <link href="css/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" href="js/primeui/primeui-2.0-min.css" />
-  <link rel="stylesheet" href="css/jquery-ui-themes-1.11.4/themes/ui-lightness/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/jquery-ui-themes-1.11.4/themes/blitzer/jquery-ui.min.css" />
   <link rel="stylesheet" href="js/datetimepicker-master/jquery.datetimepicker.css" />
 
   <!-- Custom styles for this template -->
@@ -39,22 +39,37 @@
     <ul class="sidebar-menu" >
       <li class="sub-menu">
         <a href="index.jsp" >
-          <span>Monitoreo de Torniquetes</span>
+          <span>Inicio</span>
         </a>
       </li>
       <li class="sub-menu">
-        <a href="entradas.jsp" >
-          <span>Entradas</span>
+        <a href="repentradas.jsp" >
+          <span>Consultar Entradas</span>
         </a>
       </li>
       <li class="sub-menu">
-        <a href="salidas.jsp" >
-          <span>Salidas</span>
+        <a href="repsalidas.jsp" >
+          <span>Consultar Salidas</span>
         </a>
       </li>
       <li class="sub-menu">
-        <a href="monitor.jsp" >
-          <span>Monitoreo </span>
+        <a href="monentradas.jsp" >
+          <span>Monitorear Entradas</span>
+        </a>
+      </li>
+      <li class="sub-menu">
+        <a href="monsalidas.jsp" >
+          <span>Monitorear Salidas</span>
+        </a>
+      </li>
+      <li class="sub-menu">
+        <a href="monentradasalida.jsp" >
+          <span>Monitorear Entradas/Salidas</span>
+        </a>
+      </li>
+      <li class="sub-menu">
+        <a href="reset.jsp" >
+          <span>Reset</span>
         </a>
       </li>
     </ul>
@@ -64,7 +79,9 @@
 <section id="main-content">
   <section class="wrapper">
 
-    <h3><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Salida Nororiente</h3>
+    <img class="estl" src="img/zaragoza.png"/>
+    <h3 style="display: inline-block"><i class="fa fa-angle-right"></i> Línea 1 - Zaragoza Salida Nororiente</h3>
+    <br>
     <hr>
 
     <label for="dateFrom">De: </label><input type="text" id="dateFrom">

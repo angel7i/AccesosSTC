@@ -1,11 +1,15 @@
 var loop = false;
+var ajax1 = null;
+var ajax2 = null;
 
 $(document).ready(function()
 {
-    loop = setInterval(monitorear, 1100);
+    loop = setInterval(monitorear, 1000);
 
     $(window).on("beforeunload", function()
     {
+        ajax1.abort();
+        ajax2.abort();
         clearInterval(loop);
     });
 });
@@ -27,7 +31,7 @@ function monitorear()
             ],
         datasource: function(callback)
         {
-            $.ajax({
+            ajax1 = $.ajax({
                 type: 'POST',
                 url: 'monitorearEntrada',
                 dataType: 'json',
@@ -63,7 +67,7 @@ function monitorear()
                 ],
             datasource: function(callback)
             {
-                $.ajax({
+                ajax2 = $.ajax({
                     type: 'POST',
                     url: 'monitorearSalida',
                     dataType: 'json',

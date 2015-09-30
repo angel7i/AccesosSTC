@@ -2,6 +2,12 @@
 /* Import fonts */
 /*@import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);*/
 
+@font-face
+{
+    font-family: MetroDF;
+    src: url(../fonts/MetroDF.ttf);
+}
+
 /* BASIC THEME CONFIGURATION */
 body {
     color: #797979;
@@ -412,8 +418,9 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #ffd777;
+    background: #ffc7eb;
     border-bottom: 1px solid #c9aa5f;
+    font-family: MetroDF, sans-serif;
 }
 
 .wrapper {
@@ -745,6 +752,14 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 #ml
 {
+    width: 70px;
+    height: 70px;
+}
+
+.estl
+{
+    display: inline-block;
+    margin-top: 10px;
     width: 70px;
     height: 70px;
 }
